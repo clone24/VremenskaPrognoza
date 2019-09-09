@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layout"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <EditText
+        android:id="@+id/inputCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="50dp"
+        android:gravity="center"
+        android:hint="@string/enter_name_city"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/getCityWeatherBtn"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/get_weather_btn"
+        android:fontFamily="sans-serif"
+        android:text="@string/get_weather"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/inputCity" />
+
+    <TextView
+        android:id="@+id/titleWeatherStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/weather"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/getCityWeatherBtn" />
+
+    <TextView
+        android:id="@+id/weatherStatus"
+        app:layout_constraintStart_toEndOf="@id/titleWeatherStatus"
+        app:layout_constraintTop_toBottomOf="@id/getCityWeatherBtn"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:text="Clouds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/temperatureTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/temperature"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleWeatherStatus" />
+
+    <TextView
+        android:id="@+id/temperatureValue"
+        app:layout_constraintStart_toEndOf="@id/temperatureTitle"
+        app:layout_constraintTop_toBottomOf="@id/titleWeatherStatus"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:text="25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pressureTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/pressure"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/temperatureTitle" />
+
+    <TextView
+        android:id="@+id/pressureValue"
+        app:layout_constraintStart_toEndOf="@id/pressureTitle"
+        app:layout_constraintTop_toBottomOf="@id/temperatureTitle"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:text="25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/humidityTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/humidity"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pressureTitle" />
+
+    <TextView
+        android:id="@+id/humidityValue"
+        app:layout_constraintStart_toEndOf="@id/humidityTitle"
+        app:layout_constraintTop_toBottomOf="@id/pressureTitle"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:text="25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/titleCityCoordinates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/coordinates"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/humidityTitle" />
+
+    <TextView
+        android:id="@+id/cityCoordinates"
+        app:layout_constraintStart_toEndOf="@id/titleCityCoordinates"
+        app:layout_constraintTop_toBottomOf="@id/humidityTitle"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:text="2.34, 50.4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/icnMap"
+        android:src="@drawable/icn_map"
+        android:tint="@android:color/holo_blue_dark"
+        app:layout_constraintStart_toEndOf="@id/cityCoordinates"
+        app:layout_constraintTop_toBottomOf="@id/humidityTitle"
+        android:layout_marginTop="23dp"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/windTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/wind_speed"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleCityCoordinates" />
+
+    <TextView
+        android:id="@+id/windSpeed"
+        app:layout_constraintStart_toEndOf="@id/windTitle"
+        app:layout_constraintTop_toBottomOf="@id/titleCityCoordinates"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:text="10 km/h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/windDegreeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/wind_degree"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/windTitle" />
+
+    <TextView
+        android:id="@+id/windDegree"
+        app:layout_constraintStart_toEndOf="@id/windDegreeTitle"
+        app:layout_constraintTop_toBottomOf="@id/windTitle"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:text="25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

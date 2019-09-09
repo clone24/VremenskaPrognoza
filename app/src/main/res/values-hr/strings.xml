@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vremenska Prognoza</string>
+    <string name="change_color">Promijenite boju</string>
+    <string name="close">zatvori</string>
+    <string name="created">Kreirano:</string>
+    <string name="enter_email">Unesite mail adresu</string>
+    <string name="enter_name_city">Unesite ime grada</string>
+    <string name="get_weather">Provjerite prognozu</string>
+    <string name="home">Početna</string>
+    <string name="humidity">Vlažnost:</string>
+    <string name="info">Informacije</string>
+    <string name="logout_user">Odjavite se</string>
+    <string name="open">otvorite</string>
+    <string name="phone_number">Telefonski broj:</string>
+    <string name="pressure">Tlak:</string>
+    <string name="save_user">Spremite korisnika</string>
+    <string name="temperature">Temperatura</string>
+    <string name="version_app">Verzija aplikacije:</string>
+    <string name="weather">Vrijeme:</string>
+    <string name="coordinates">Koordinate:</string>
+    <string name="settings">Postavke</string>
+    <string name="wind_speed">Brzina vjetra:</string>
+    <string name="wind_degree">Smjer vjetra:</string>
+    <string name="not_valid_email">Mail adresa nije valjana</string>
+</resources>
