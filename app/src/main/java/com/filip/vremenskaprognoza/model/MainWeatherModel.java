@@ -12,43 +12,27 @@ public class MainWeatherModel {
     @SerializedName("temp_max")
     private double tempMax;
 
-    public double getTemp() {
-        return temp;
+    public MainWeatherModel() {
     }
 
-    public void setTemp(double temp) {
-        this.temp = temp;
+    public double getTemp() {
+        return temp;
     }
 
     public double getPressure() {
         return pressure;
     }
 
-    public void setPressure(int pressure) {
-        this.pressure = pressure;
-    }
-
     public int getHumidity() {
         return humidity;
-    }
-
-    public void setHumidity(int humidity) {
-        this.humidity = humidity;
     }
 
     public double getTempMin() {
         return tempMin;
     }
 
-    public void setTempMin(double tempMin) {
-        this.tempMin = tempMin;
-    }
-
     public double getTempMax() {
         return tempMax;
     }
 
-    public void setTempMax(double tempMax) {
-        this.tempMax = tempMax;
-    }
 }

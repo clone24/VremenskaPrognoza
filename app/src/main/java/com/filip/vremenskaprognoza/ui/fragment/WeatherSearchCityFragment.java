@@ -1,14 +1,18 @@
 package com.filip.vremenskaprognoza.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -38,14 +43,17 @@ import retrofit2.Response;
 import static com.filip.vremenskaprognoza.common.Common.API_KEY;
 import static com.filip.vremenskaprognoza.common.Common.BOOLEAN_KEY;
 import static com.filip.vremenskaprognoza.common.Common.CRO_LANG_CODE;
+import static com.filip.vremenskaprognoza.common.Common.EMPTY_SPACE;
 import static com.filip.vremenskaprognoza.common.Common.EN_LANG_CODE;
 import static com.filip.vremenskaprognoza.common.Common.METRIC;
 
-public class WeatherFragment extends Fragment {
+public class WeatherSearchCityFragment extends Fragment {
 
-    private TextView temperatureValue, humidityValue, pressureValue, latLongValue, weatherStatusTextView, tvWindSpeed, tvWindDegree;
+    private TextView temperatureValue, humidityValue, pressureValue, latLongValue, weatherStatusTextView, tvWindSpeed, tvWindDegree, minTemperatureValue, maxTemperatureValue;
 
     private ImageView mapImageView;
+
+    private View progressBar;
 
     private ConstraintLayout layout;
 
@@ -59,18 +67,20 @@ public class WeatherFragment extends Fragment {
     private DecimalFormat decimalFormat = new DecimalFormat("0.0");
 
     private SharedPrefs sharedPrefs;
-
     private String languageCode;
+
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_weather, container, false);
+        return inflater.inflate(R.layout.fragment_weather_search_city, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        checkPermissions();
         languageCode = Locale.getDefault().getLanguage();
         sharedPrefs = SharedPrefs.getInstance(getActivity());
         initWidgets(view);
@@ -80,15 +90,42 @@ public class WeatherFragment extends Fragment {
         initLanguage();
     }
 
+    private void checkPermissions() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{
+                                android.Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                if (PackageManager.PERMISSION_GRANTED == grantResults[0]) {
+                } else {
+                    Toast.makeText(getActivity(), "your message", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
     private void initLanguage() {
-        if(languageCode.equals(CRO_LANG_CODE)){
+        if (languageCode.equals(CRO_LANG_CODE)) {
             languageCode = CRO_LANG_CODE;
-        }else{
+        } else {
             languageCode = EN_LANG_CODE;
         }
     }
 
     private void initWidgets(View view) {
+
+        maxTemperatureValue = view.findViewById(R.id.maxTemperatureValue);
+        minTemperatureValue = view.findViewById(R.id.minTemperatureValue);
         temperatureValue = view.findViewById(R.id.temperatureValue);
         humidityValue = view.findViewById(R.id.humidityValue);
         pressureValue = view.findViewById(R.id.pressureValue);
@@ -100,6 +137,7 @@ public class WeatherFragment extends Fragment {
         tvWindSpeed = view.findViewById(R.id.windSpeed);
         tvWindDegree = view.findViewById(R.id.windDegree);
         layout = view.findViewById(R.id.layout);
+        progressBar = view.findViewById(R.id.progressBar);
     }
 
     private void initListeners() {
@@ -109,10 +147,10 @@ public class WeatherFragment extends Fragment {
                 if (inputCity.getText().toString().isEmpty()) {
                     Toast.makeText(getActivity(), getString(R.string.enter_name_city), Toast.LENGTH_SHORT).show();
                 } else {
+                    progressBar.setVisibility(View.VISIBLE);
                     loadData(inputCity.getText().toString());
+                    hideKeyboard(getActivity());
                 }
-
-                weatherStatusTextView.onEditorAction(EditorInfo.IME_ACTION_DONE);
             }
         });
         mapImageView.setOnClickListener(new View.OnClickListener() {
@@ -131,16 +169,19 @@ public class WeatherFragment extends Fragment {
         }
     }
 
-
     private void loadData(String city) {
 
-        mService.getAnswers(city, METRIC, languageCode,API_KEY).enqueue(new Callback<WeatherResult>() {
+        mService.getWeather(city, METRIC, languageCode, API_KEY).enqueue(new Callback<WeatherResult>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<WeatherResult> call, Response<WeatherResult> response) {
                 if (response.isSuccessful()) {
-                    Log.d("rezultat", response.toString());
+
+                    progressBar.setVisibility(View.GONE);
+
                     String temperature = decimalFormat.format(response.body().getMainWeatherModel().getTemp()) + getString(R.string.celsius);
+                    String minTemperature = decimalFormat.format(response.body().getMainWeatherModel().getTempMin()) + getString(R.string.celsius);
+                    String maxTemperature = decimalFormat.format(response.body().getMainWeatherModel().getTempMax()) + getString(R.string.celsius);
 
                     latitude = response.body().getCoordinatesModel().getLat();
                     longitude = response.body().getCoordinatesModel().getLon();
@@ -160,15 +201,18 @@ public class WeatherFragment extends Fragment {
                     weatherStatusTextView.setText(weatherStatus);
                     tvWindSpeed.setText(windSpeed);
                     tvWindDegree.setText(windDegree);
+                    minTemperatureValue.setText(minTemperature);
+                    maxTemperatureValue.setText(maxTemperature);
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(getActivity(), "Try again", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<WeatherResult> call, Throwable errorMesage) {
-                Toast.makeText(getActivity(), errorMesage.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<WeatherResult> call, Throwable errorMessage) {
+                Toast.makeText(getActivity(), errorMessage.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -176,7 +220,7 @@ public class WeatherFragment extends Fragment {
 
     private void initButtonColor() {
 
-        if (sharedPrefs.getColor(BOOLEAN_KEY) == false) {
+        if (!sharedPrefs.getColor(BOOLEAN_KEY)) {
             setBlueColor();
 
         } else {
@@ -195,5 +239,18 @@ public class WeatherFragment extends Fragment {
         getCityWeatherBtn.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.grey_button));
         layout.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.blue_bg));
 
+    }
+
+    private static void hideKeyboard(Activity activity) {
+        try {
+            InputMethodManager inputManager = (InputMethodManager) activity
+                    .getSystemService(Context.INPUT_METHOD_SERVICE);
+            View currentFocusedView = activity.getCurrentFocus();
+            if (currentFocusedView != null) {
+                inputManager.hideSoftInputFromWindow(currentFocusedView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

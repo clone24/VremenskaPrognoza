@@ -1,15 +1,16 @@
 package com.filip.vremenskaprognoza.ui.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -56,11 +57,9 @@ public class SettingsFragment extends Fragment {
 
     private void initData() {
         if (sharedPrefs.getData(DATA_KEY).isEmpty()) {
-
             inputEmail.setVisibility(View.VISIBLE);
             email.setVisibility(View.INVISIBLE);
             saveLogoutBtn.setText(getString(R.string.save_user));
-
 
         } else {
             inputEmail.setVisibility(View.INVISIBLE);
@@ -87,16 +86,12 @@ public class SettingsFragment extends Fragment {
                 } else {
                     logoutUser();
                 }
-
-                inputEmail.onEditorAction(EditorInfo.IME_ACTION_DONE);
-
             }
         });
 
         changeColorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (sharedPrefs.getColor(BOOLEAN_KEY) == false) {
                     sharedPrefs.changeColor(BOOLEAN_KEY, true);
                     setRedColor();
@@ -110,21 +105,22 @@ public class SettingsFragment extends Fragment {
     }
 
     private void logoutUser() {
-        sharedPrefs.clear();
-
+        sharedPrefs.clearData(DATA_KEY);
+        initData();
     }
 
     private void saveUser() {
         if (inputEmail.getText().toString().isEmpty()) {
-            Toast.makeText(getActivity(),getString(R.string.enter_email),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.enter_email), Toast.LENGTH_SHORT).show();
         } else {
-            if(isValidEmail(inputEmail.getText().toString())){
+            if (isValidEmail(inputEmail.getText().toString())) {
                 sharedPrefs.saveData(DATA_KEY, inputEmail.getText().toString());
-            }else{
-                Toast.makeText(getActivity(),getString(R.string.not_valid_email),Toast.LENGTH_SHORT).show();
+                hideKeyboard(getActivity());
+                initData();
+            } else {
+                Toast.makeText(getActivity(), getString(R.string.not_valid_email), Toast.LENGTH_SHORT).show();
             }
         }
-
     }
 
     private void setBlueColor() {
@@ -138,14 +134,28 @@ public class SettingsFragment extends Fragment {
         saveLogoutBtn.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.grey_button));
         changeColorButton.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.grey_button));
         layout.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.blue_bg));
+
     }
 
-    public final static boolean isValidEmail(CharSequence target) {
+    private static boolean isValidEmail(CharSequence target) {
         if (target == null) {
             return false;
 
         } else {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
+    }
+
+    private static void hideKeyboard(Activity activity) {
+        try {
+            InputMethodManager inputManager = (InputMethodManager) activity
+                    .getSystemService(Context.INPUT_METHOD_SERVICE);
+            View currentFocusedView = activity.getCurrentFocus();
+            if (currentFocusedView != null) {
+                inputManager.hideSoftInputFromWindow(currentFocusedView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

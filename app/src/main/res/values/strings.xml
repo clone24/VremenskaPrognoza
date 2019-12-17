@@ -13,7 +13,7 @@
     <string name="phone_number">Phone Number:</string>
     <string name="e_mail" translatable="false">E-mail:</string>
     <string name="created">Created:</string>
-    <string name="home">Home</string>
+    <string name="city">City</string>
     <string name="info">Info</string>
     <string name="enter_email">Enter e-mail</string>
     <string name="save_user">Save User</string>
@@ -28,4 +28,11 @@
     <string name="wind_speed">Wind speed:</string>
     <string name="wind_degree">Wind degree:</string>
     <string name="not_valid_email">Not valid e-mail</string>
+    <string name="location">Location</string>
+    <string name="max_temperature">"Max temperature: "</string>
+    <string name="min_temperature">Min temperature:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+
+
 </resources>

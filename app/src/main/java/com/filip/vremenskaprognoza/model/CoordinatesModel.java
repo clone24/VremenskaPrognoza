@@ -5,19 +5,15 @@ public class CoordinatesModel {
     private double lon;
     private double lat;
 
-    public double getLon() {
-        return lon;
+    public CoordinatesModel() {
     }
 
-    public void setLon(double lon) {
-        this.lon = lon;
+    public double getLon() {
+        return lon;
     }
 
     public double getLat() {
         return lat;
     }
 
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
 }
