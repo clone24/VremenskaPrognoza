@@ -8,19 +8,14 @@ public class WindModel {
     @SerializedName("deg")
     private double windDegree;
 
+    public WindModel() {
+    }
+
     public double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
-    }
-
     public double getWindDegree() {
         return windDegree;
-    }
-
-    public void setWindDegree(double windDegree) {
-        this.windDegree = windDegree;
     }
 }

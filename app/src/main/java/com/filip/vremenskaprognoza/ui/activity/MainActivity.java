@@ -2,18 +2,17 @@ package com.filip.vremenskaprognoza.ui.activity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.filip.vremenskaprognoza.R;
 import com.filip.vremenskaprognoza.ui.fragment.InfoFragment;
 import com.filip.vremenskaprognoza.ui.fragment.SettingsFragment;
-import com.filip.vremenskaprognoza.ui.fragment.WeatherFragment;
+import com.filip.vremenskaprognoza.ui.fragment.WeatherByLocationFragment;
+import com.filip.vremenskaprognoza.ui.fragment.WeatherSearchCityFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initFragmentToOpen() {
-        WeatherFragment newFragment = new WeatherFragment();
+        WeatherSearchCityFragment newFragment = new WeatherSearchCityFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, newFragment);
         transaction.addToBackStack(null);
@@ -64,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
                 switch (id) {
-                    case R.id.home:
-                        WeatherFragment newFragment = new WeatherFragment();
+                    case R.id.city:
+                        WeatherSearchCityFragment newFragment = new WeatherSearchCityFragment();
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.container, newFragment);
                         transaction.addToBackStack(null);
@@ -88,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
                         transactionInfo.commit();
                         drawerLayout.closeDrawers();
                         break;
+                    case R.id.location:
+                        WeatherByLocationFragment locationFragment = new WeatherByLocationFragment();
+                        FragmentTransaction transactionLocation = getSupportFragmentManager().beginTransaction();
+                        transactionLocation.replace(R.id.container, locationFragment);
+                        transactionLocation.addToBackStack(null);
+                        transactionLocation.commit();
+                        drawerLayout.closeDrawers();
                     default:
                         return true;
                 }

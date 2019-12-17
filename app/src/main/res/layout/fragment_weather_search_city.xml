@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/inputCity"
@@ -45,15 +45,15 @@
 
     <TextView
         android:id="@+id/weatherStatus"
-        app:layout_constraintStart_toEndOf="@id/titleWeatherStatus"
-        app:layout_constraintTop_toBottomOf="@id/getCityWeatherBtn"
-        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        tools:text="Clouds"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        app:layout_constraintStart_toEndOf="@id/titleWeatherStatus"
+        app:layout_constraintTop_toBottomOf="@id/getCityWeatherBtn"
+        tools:text="Clouds" />
 
     <TextView
         android:id="@+id/temperatureTitle"
@@ -69,15 +69,61 @@
 
     <TextView
         android:id="@+id/temperatureValue"
-        app:layout_constraintStart_toEndOf="@id/temperatureTitle"
-        app:layout_constraintTop_toBottomOf="@id/titleWeatherStatus"
-        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        tools:text="25"
+        app:layout_constraintStart_toEndOf="@+id/temperatureTitle"
+        app:layout_constraintTop_toBottomOf="@id/titleWeatherStatus"
+        tools:text="25" />
+
+    <TextView
+        android:id="@+id/maxTemperatureTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/max_temperature"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/temperatureTitle"
+        app:layout_constraintTop_toBottomOf="@id/temperatureTitle" />
+
+    <TextView
+        android:id="@+id/maxTemperatureValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/maxTemperatureTitle"
+        app:layout_constraintTop_toBottomOf="@id/temperatureTitle"
+        tools:text="25" />
+
+    <TextView
+        android:id="@+id/minTemperatureTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/min_temperature"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/maxTemperatureTitle"
+        app:layout_constraintTop_toBottomOf="@id/maxTemperatureTitle" />
+
+    <TextView
+        android:id="@+id/minTemperatureValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/minTemperatureTitle"
+        app:layout_constraintTop_toBottomOf="@id/maxTemperatureTitle"
+        tools:text="25" />
 
     <TextView
         android:id="@+id/pressureTitle"
@@ -89,19 +135,19 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/temperatureTitle" />
+        app:layout_constraintTop_toBottomOf="@id/minTemperatureTitle" />
 
     <TextView
         android:id="@+id/pressureValue"
-        app:layout_constraintStart_toEndOf="@id/pressureTitle"
-        app:layout_constraintTop_toBottomOf="@id/temperatureTitle"
-        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        tools:text="25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        app:layout_constraintStart_toEndOf="@+id/pressureTitle"
+        app:layout_constraintTop_toBottomOf="@id/minTemperatureTitle"
+        tools:text="25" />
 
     <TextView
         android:id="@+id/humidityTitle"
@@ -117,15 +163,15 @@
 
     <TextView
         android:id="@+id/humidityValue"
-        app:layout_constraintStart_toEndOf="@id/humidityTitle"
-        app:layout_constraintTop_toBottomOf="@id/pressureTitle"
-        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        tools:text="25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        app:layout_constraintStart_toEndOf="@id/humidityTitle"
+        app:layout_constraintTop_toBottomOf="@id/pressureTitle"
+        tools:text="25" />
 
 
     <TextView
@@ -142,26 +188,26 @@
 
     <TextView
         android:id="@+id/cityCoordinates"
-        app:layout_constraintStart_toEndOf="@id/titleCityCoordinates"
-        app:layout_constraintTop_toBottomOf="@id/humidityTitle"
-        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        tools:text="2.34, 50.4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        app:layout_constraintStart_toEndOf="@id/titleCityCoordinates"
+        app:layout_constraintTop_toBottomOf="@id/humidityTitle"
+        tools:text="2.34, 50.4" />
 
     <ImageView
         android:id="@+id/icnMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="23dp"
         android:src="@drawable/icn_map"
         android:tint="@android:color/holo_blue_dark"
         app:layout_constraintStart_toEndOf="@id/cityCoordinates"
-        app:layout_constraintTop_toBottomOf="@id/humidityTitle"
-        android:layout_marginTop="23dp"
-        android:layout_marginStart="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        app:layout_constraintTop_toBottomOf="@id/humidityTitle" />
 
     <TextView
         android:id="@+id/windTitle"
@@ -177,15 +223,15 @@
 
     <TextView
         android:id="@+id/windSpeed"
-        app:layout_constraintStart_toEndOf="@id/windTitle"
-        app:layout_constraintTop_toBottomOf="@id/titleCityCoordinates"
-        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        tools:text="10 km/h"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        app:layout_constraintStart_toEndOf="@id/windTitle"
+        app:layout_constraintTop_toBottomOf="@id/titleCityCoordinates"
+        tools:text="10 km/h" />
 
     <TextView
         android:id="@+id/windDegreeTitle"
@@ -201,16 +247,23 @@
 
     <TextView
         android:id="@+id/windDegree"
-        app:layout_constraintStart_toEndOf="@id/windDegreeTitle"
-        app:layout_constraintTop_toBottomOf="@id/windTitle"
-        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        tools:text="25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        app:layout_constraintStart_toEndOf="@id/windDegreeTitle"
+        app:layout_constraintTop_toBottomOf="@id/windTitle"
+        tools:text="25" />
 
-
+    <include
+        android:id="@+id/progressBar"
+        layout="@layout/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

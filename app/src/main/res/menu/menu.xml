@@ -2,9 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/home"
-        android:icon="@drawable/icn_home"
-        android:title="@string/home" />
+        android:id="@+id/city"
+        android:icon="@drawable/city_icon"
+        android:title="@string/city" />
+
+    <item
+        android:id="@+id/location"
+        android:icon="@drawable/my_location"
+        android:title="@string/location" />
     <item
         android:id="@+id/settings"
         android:icon="@drawable/icn_settings"

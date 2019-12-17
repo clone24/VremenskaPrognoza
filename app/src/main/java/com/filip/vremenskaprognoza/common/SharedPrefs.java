@@ -16,12 +16,14 @@ public class SharedPrefs {
 
     private SharedPrefs(Context context) {
         sharedPreferences = context.getSharedPreferences("SharedPrefs", Context.MODE_PRIVATE);
+
     }
 
     public void saveData(String key, String value) {
         SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
         prefsEditor.putString(key, value);
         prefsEditor.apply();
+
     }
 
     public String getData(String key) {
@@ -31,15 +33,13 @@ public class SharedPrefs {
         return "";
     }
 
-    public void clear() { // Delete all shared preferences
+    public void clearData(String key) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
+        editor.remove(key);
         editor.apply();
-
     }
 
     public void changeColor(String key, boolean value) {
-
         SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
         prefsEditor.putBoolean(key, value);
         prefsEditor.apply();
