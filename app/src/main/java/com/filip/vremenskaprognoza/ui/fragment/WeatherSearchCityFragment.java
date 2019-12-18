@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +42,6 @@ import retrofit2.Response;
 import static com.filip.vremenskaprognoza.common.Common.API_KEY;
 import static com.filip.vremenskaprognoza.common.Common.BOOLEAN_KEY;
 import static com.filip.vremenskaprognoza.common.Common.CRO_LANG_CODE;
-import static com.filip.vremenskaprognoza.common.Common.EMPTY_SPACE;
 import static com.filip.vremenskaprognoza.common.Common.EN_LANG_CODE;
 import static com.filip.vremenskaprognoza.common.Common.METRIC;
 
@@ -102,15 +100,13 @@ public class WeatherSearchCityFragment extends Fragment {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_CODE_ASK_PERMISSIONS:
-                if (PackageManager.PERMISSION_GRANTED == grantResults[0]) {
-                } else {
-                    Toast.makeText(getActivity(), "your message", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_ASK_PERMISSIONS) {
+            if (PackageManager.PERMISSION_GRANTED == grantResults[0]) {
+            } else {
+                Toast.makeText(getActivity(), "your message", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 
